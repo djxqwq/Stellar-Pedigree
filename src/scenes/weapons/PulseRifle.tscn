@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://eyb1jtfclp77"]
+
+[ext_resource type="Script" path="res://src/scripts/weapons/PulseRifle.gd" id="1_pulserifle"]
+
+[node name="PulseRifle" type="Node2D"]
+script = ExtResource("1_pulserifle")
