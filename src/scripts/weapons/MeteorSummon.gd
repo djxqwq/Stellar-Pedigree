@@ -21,11 +21,11 @@ func shoot(position: Vector2, direction: Vector2):
 	
 	match current_form:
 		1:
-			_summon_meteors(position, meteor_count)
+			_summon_meteors(position, direction, meteor_count)
 		2:
-			_summon_meteors(position, 2)
+			_summon_meteors(position, direction, 2)
 		3:
-			_summon_shockwave_meteors(position, 2)
+			_summon_shockwave_meteors(position, direction, 2)
 
 func _summon_meteors(position: Vector2, direction: Vector2, count: int):
 	for i in range(count):

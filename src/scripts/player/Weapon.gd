@@ -20,7 +20,6 @@ func _process(delta):
 
 func can_shoot() -> bool:
 	var cooldown_time = 1.0 / fire_rate
-	print("Time since last shot: ", time_since_last_shot, " / Cooldown: ", cooldown_time)
 	return time_since_last_shot >= cooldown_time
 
 func shoot(position: Vector2, direction: Vector2):
@@ -31,6 +30,13 @@ func shoot(position: Vector2, direction: Vector2):
 	_create_bullet(position, direction)
 
 func _create_bullet(position: Vector2, direction: Vector2):
+	# Override in specific weapon classes for custom effects
+	print("Creating bullet for weapon: ", weapon_name)
+	_create_custom_bullet(position, direction)
+
+func _create_custom_bullet(position: Vector2, direction: Vector2):
+	# Default bullet creation
+	print("Using DEFAULT bullet creation for: ", weapon_name)
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = position

@@ -27,15 +27,49 @@ func shoot(position: Vector2, direction: Vector2):
 		3:
 			_throw_explosive_grenade(position, direction)
 
+func _create_custom_bullet(position: Vector2, direction: Vector2):
+	# Override for black hole grenade
+	print("Creating BLACK HOLE GRENADE")
+	_throw_grenade(position, direction, black_hole_duration)
+
 func _throw_grenade(position: Vector2, direction: Vector2, duration: float):
-	var grenade = bullet_scene.instantiate()
+	# Create a custom black hole grenade instead of using regular bullet
+	var grenade = Node2D.new()
+	grenade.name = "BlackHoleGrenade"
 	get_tree().current_scene.add_child(grenade)
 	grenade.global_position = position
-	grenade.setup(direction, damage, bullet_speed)
 	
-	# Create black hole on impact
-	# Will implement when we have collision detection
-	_create_black_hole(grenade.global_position, duration)
+	# Add visual effect
+	var sprite = Sprite2D.new()
+	var texture = ImageTexture.new()
+	var image = Image.create(16, 16, false, Image.FORMAT_RGBA8)
+	image.fill(Color.TRANSPARENT)
+	# Draw purple circle for grenade
+	for y in range(16):
+		for x in range(16):
+			var dist = Vector2(x - 8, y - 8).length()
+			if dist <= 6:
+				image.set_pixel(x, y, Color.PURPLE)
+			if dist <= 4:
+				image.set_pixel(x, y, Color.BLACK)
+	texture.set_image(image)
+	sprite.texture = texture
+	grenade.add_child(sprite)
+	
+	# Add movement
+	var tween = create_tween()
+	tween.tween_method(_move_grenade.bind(grenade, direction), 0.0, 1.0, 1.0)
+	
+	# Create black hole after delay
+	var timer = Timer.new()
+	timer.wait_time = 1.0
+	timer.one_shot = true
+	grenade.add_child(timer)
+	timer.timeout.connect(_create_black_hole.bind(grenade.global_position, duration))
+	timer.start()
+
+func _move_grenade(grenade: Node2D, direction: Vector2, progress: float):
+	grenade.global_position += direction * bullet_speed * 0.016
 
 func _create_black_hole(position: Vector2, duration: float):
 	var black_hole = Node2D.new()
@@ -43,21 +77,29 @@ func _create_black_hole(position: Vector2, duration: float):
 	get_tree().current_scene.add_child(black_hole)
 	black_hole.global_position = position
 	
-	# Create pull effect
-	var pull_area = Area2D.new()
-	var collision_shape = CollisionShape2D.new()
-	var circle_shape = CircleShape2D.new()
-	circle_shape.radius = pull_radius
-	collision_shape.shape = circle_shape
-	pull_area.add_child(collision_shape)
-	black_hole.add_child(pull_area)
+	# Create visual effect - larger purple circle
+	var sprite = Sprite2D.new()
+	var texture = ImageTexture.new()
+	var image = Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	image.fill(Color.TRANSPARENT)
+	# Draw purple circle for black hole
+	for y in range(32):
+		for x in range(32):
+			var dist = Vector2(x - 16, y - 16).length()
+			if dist <= 12:
+				image.set_pixel(x, y, Color(0.5, 0.0, 1.0, 0.8))
+			if dist <= 8:
+				image.set_pixel(x, y, Color.BLACK)
+	texture.set_image(image)
+	sprite.texture = texture
+	black_hole.add_child(sprite)
 	
-	# Create visual effect
+	# Create particle effect
 	var particles = CPUParticles2D.new()
-	particles.amount = 30
-	particles.lifetime = 2.0
+	particles.amount = 50
+	particles.lifetime = 3.0
 	particles.emitting = true
-	particles.color = Color(0.2, 0.0, 0.5, 0.8)
+	particles.color = Color(0.5, 0.0, 1.0, 0.6)
 	black_hole.add_child(particles)
 	
 	# Remove black hole after duration

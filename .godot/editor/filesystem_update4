@@ -1,0 +1,13 @@
+res://src/scripts/player/Bullet.gd
+res://src/scripts/player/Player.gd
+res://src/scripts/player/Weapon.gd
+res://src/scripts/weapons/PulseRifle.gd
+res://src/scripts/Main.gd
+res://src/scenes/Main.tscn
+res://src/scripts/SimpleMain.gd
+res://src/scenes/player/Bullet.tscn
+res://src/scripts/WeaponManager.gd
+res://src/scripts/weapons/BlackHoleGrenade.gd
+res://src/scripts/weapons/StardustShotgun.gd
+res://src/scripts/weapons/HeavyParticleCannon.gd
+res://src/scripts/weapons/MeteorSummon.gd

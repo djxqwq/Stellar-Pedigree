@@ -9,18 +9,13 @@ func _ready():
 	fire_rate = 3.0
 	bullet_speed = 800.0
 	
-	print("PulseRifle ready - Fire rate: ", fire_rate)
-	
 	# Create bullet scene
 	bullet_scene = preload("res://src/scenes/player/Bullet.tscn")
 
 func shoot(position: Vector2, direction: Vector2):
-	print("Weapon shoot called")
 	if not can_shoot():
-		print("Cannot shoot - cooldown")
 		return
 	
-	print("Shooting bullet")
 	time_since_last_shot = 0.0
 	
 	match current_form:
@@ -32,7 +27,6 @@ func shoot(position: Vector2, direction: Vector2):
 			_shoot_triple(position, direction)
 
 func _shoot_single(position: Vector2, direction: Vector2):
-	print("Creating single bullet")
 	_create_bullet(position, direction)
 
 func _shoot_double(position: Vector2, direction: Vector2):

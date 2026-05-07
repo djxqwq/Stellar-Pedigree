@@ -105,15 +105,25 @@ func _process(delta):
 	
 	# Weapon switching for testing
 	if Input.is_action_just_pressed("ui_next"): # Q key - next weapon
+		print("Q pressed - switching to next weapon")
 		var new_weapon = weapon_manager.switch_to_next_weapon()
+		print("New weapon created: ", new_weapon)
 		player.weapons.clear()
 		player.add_weapon(new_weapon)
+		print("Player current weapon: ", player.current_weapon)
+		print("Player current weapon name: ", player.current_weapon.weapon_name if player.current_weapon else "None")
+		print("Player weapons count: ", player.weapons.size())
 	
 	if Input.is_action_just_pressed("ui_prev"): # E key - previous weapon
+		print("E pressed - switching to previous weapon")
 		var new_weapon = weapon_manager.switch_to_previous_weapon()
+		print("New weapon created: ", new_weapon)
 		player.weapons.clear()
 		player.add_weapon(new_weapon)
+		print("Player current weapon: ", player.current_weapon)
+		print("Player current weapon name: ", player.current_weapon.weapon_name if player.current_weapon else "None")
+		print("Player weapons count: ", player.weapons.size())
 	
-	# Display bullet count
-	if bullet_count > 0:
-		print("Bullets in scene: ", bullet_count)
+	# Bullet count tracking (debug disabled)
+	# if bullet_count > 0:
+	#     print("Bullets in scene: ", bullet_count)
