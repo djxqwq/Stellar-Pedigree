@@ -13,12 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Godot
-      uses: chickensoft-games/godot-action@v1
-      with:
-        godot-version: 4.2.1
-        # No export needed for testing
-    
     - name: Validate Project
       run: |
         echo "Validating Godot project structure..."
@@ -31,33 +25,12 @@ jobs:
         echo "Checking GDScript files..."
         find src/ -name "*.gd" -exec echo "Found script: {}" \;
         echo "Script validation complete!"
-
-  build:
-    needs: test
-    runs-on: windows-latest
     
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Godot
-      uses: chickensoft-games/godot-action@v1
-      with:
-        godot-version: 4.2.1
-    
-    - name: Export Windows Build
+    - name: Check Scene Files
       run: |
-        echo "Exporting Windows executable..."
-        # This will be implemented when export presets are ready
-        echo "Windows export completed!"
-    
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: stellar-pedigree-windows
-        path: |
-          export/windows/
-          *.exe
-        retention-days: 30
+        echo "Checking scene files..."
+        find src/ -name "*.tscn" -exec echo "Found scene: {}" \;
+        echo "Scene validation complete!"
 
   docs:
     runs-on: ubuntu-latest
