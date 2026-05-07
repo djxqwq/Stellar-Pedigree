@@ -1,0 +1,28 @@
+# Godot specific files
+.import/
+export/
+godot/
+
+# Build artifacts
+*.exe
+*.exe.debug
+*.pck
+*.zip
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Log files
+*.log
+
+# Cache
+.cache/
