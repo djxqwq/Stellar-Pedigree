@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ymv7q2e64d5s"]
+
+[ext_resource type="Script" path="res://src/scripts/player/GravityGrenade.gd" id="1_gravitygrenade"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gravitygrenade"]
+radius = 5.0
+
+[node name="GravityGrenade" type="Area2D"]
+script = ExtResource("1_gravitygrenade")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gravitygrenade")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 1.2
+direction = Vector2(0, -1)
+spread = 15.0
+initial_velocity_min = -200.0
+initial_velocity_max = -50.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+color = Color(0.5, 0, 1, 1)

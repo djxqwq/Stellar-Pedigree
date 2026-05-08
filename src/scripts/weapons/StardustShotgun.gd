@@ -4,14 +4,14 @@ extends "res://src/scripts/player/Weapon.gd"
 @export var spread_angle: float = 30.0
 
 func _ready():
-	weapon_name = "Stardust Shotgun"
+	weapon_name = "星尘霰弹"
 	damage = 8
 	fire_rate = 1.5
 	bullet_speed = 600.0
 	pellet_count = 5
 	spread_angle = 30.0
 	
-	bullet_scene = preload("res://src/scenes/player/Bullet.tscn")
+	bullet_scene = preload("res://src/scenes/player/ShotgunPellet.tscn")
 
 func shoot(position: Vector2, direction: Vector2):
 	if not can_shoot():
@@ -42,40 +42,13 @@ func _shoot_spread(position: Vector2, direction: Vector2, pellets: int):
 		_create_shotgun_pellet(position, pellet_dir)
 
 func _create_shotgun_pellet(position: Vector2, direction: Vector2):
-	# Create individual pellet with custom visual
-	var pellet = Node2D.new()
-	pellet.name = "ShotgunPellet"
+	# Create individual pellet using custom bullet scene
+	var pellet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(pellet)
 	pellet.global_position = position
-	
-	# Add visual effect - smaller yellow pellet
-	var sprite = Sprite2D.new()
-	var texture = ImageTexture.new()
-	var image = Image.create(8, 8, false, Image.FORMAT_RGBA8)
-	image.fill(Color.TRANSPARENT)
-	# Draw small yellow circle
-	for y in range(8):
-		for x in range(8):
-			var dist = Vector2(x - 4, y - 4).length()
-			if dist <= 3:
-				image.set_pixel(x, y, Color.YELLOW)
-	texture.set_image(image)
-	sprite.texture = texture
-	pellet.add_child(sprite)
-	
-	# Add movement
-	var tween = create_tween()
-	tween.tween_method(_move_shotgun_pellet.bind(pellet, direction), 0.0, 1.0, 2.0)
-	
-	# Remove after lifetime
-	var remove_timer = Timer.new()
-	remove_timer.wait_time = 2.0
-	remove_timer.one_shot = true
-	pellet.add_child(remove_timer)
-	remove_timer.timeout.connect(pellet.queue_free)
-
-func _move_shotgun_pellet(pellet: Node2D, direction: Vector2, progress: float):
-	pellet.global_position += direction * bullet_speed * 0.016
+	pellet.bullet_type = "shotgun"
+	pellet.custom_size = 0.8
+	pellet.setup(direction, damage, bullet_speed)
 
 func _shoot_wide(position: Vector2, direction: Vector2):
 	# Form 2: More pellets, narrower spread

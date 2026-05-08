@@ -150,18 +150,9 @@ func die():
 	# Will implement game over logic later
 
 func add_weapon(weapon):
-	print("Adding weapon to player: ", weapon)
-	print("Weapon name: ", weapon.weapon_name if weapon.has_method("get") else "Unknown")
 	weapons.append(weapon)
 	$WeaponHolder.add_child(weapon)
-	if not current_weapon:
-		current_weapon = weapon
-		print("Set as current weapon")
-	else:
-		current_weapon = weapon  # Always set new weapon as current
-		print("Updated current weapon")
-	print("Player current weapon after add: ", current_weapon)
-	print("Player current weapon name after add: ", current_weapon.weapon_name if current_weapon else "None")
+	current_weapon = weapon  # Always set new weapon as current
 
 func switch_weapon(weapon_index: int):
 	if weapon_index >= 0 and weapon_index < weapons.size():

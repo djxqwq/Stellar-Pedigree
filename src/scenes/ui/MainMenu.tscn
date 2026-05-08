@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://mainmenu123"]
+
+[ext_resource type="Script" path="res://src/scripts/ui/MainMenu.gd" id="1_main_menu"]
+[ext_resource type="Theme" uid="uid://theme123" path="res://src/resources/ui_theme.tres" id="2_theme"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_main_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.15, 1)
+
+[node name="Starfield" type="Node2D" parent="Background"]
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = -200.0
+theme = ExtResource("2_theme")
+text = "星尘谱系"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -180.0
+offset_right = 150.0
+offset_bottom = -140.0
+theme = ExtResource("2_theme")
+text = "Stellar Pedigree"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 150.0
+theme = ExtResource("2_theme")
+
+[node name="StartButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+theme = ExtResource("2_theme")
+text = "开始游戏"
+
+[node name="OptionsButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+theme = ExtResource("2_theme")
+text = "游戏设置"
+
+[node name="QuitButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+theme = ExtResource("2_theme")
+text = "退出游戏"
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -30.0
+offset_right = -10.0
+offset_bottom = -10.0
+theme = ExtResource("2_theme")
+text = "v1.0.0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="MenuContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://daqrl6jvwoaq4"]
+
+[ext_resource type="Script" path="res://src/scripts/ui/WeaponSelect.gd" id="1_weapon_select"]
+[ext_resource type="Theme" path="res://src/resources/ui_theme_fixed.tres" id="2_theme"]
+
+[node name="WeaponSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_weapon_select")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.15, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -350.0
+offset_right = 200.0
+offset_bottom = -300.0
+theme = ExtResource("2_theme")
+text = "选择你的武器"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -280.0
+offset_right = 250.0
+offset_bottom = -250.0
+theme = ExtResource("2_theme")
+text = "每局游戏只能使用一把武器，选择你的战斗风格"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaponGrid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -200.0
+offset_right = 400.0
+offset_bottom = 200.0
+theme = ExtResource("2_theme")
+columns = 5
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = -10.0
+theme = ExtResource("2_theme")
+text = "返回"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

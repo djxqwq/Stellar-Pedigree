@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://clrkv8fqewclr"]
+
+[ext_resource type="Script" path="res://src/scripts/player/EnhancedBullet.gd" id="1_enhancedbullet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enhancedbullet"]
+radius = 4.0
+
+[node name="EnhancedBullet" type="Area2D"]
+script = ExtResource("1_enhancedbullet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_enhancedbullet")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+color = Color(1, 1, 0, 1)

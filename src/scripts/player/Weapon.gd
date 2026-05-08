@@ -31,16 +31,15 @@ func shoot(position: Vector2, direction: Vector2):
 
 func _create_bullet(position: Vector2, direction: Vector2):
 	# Override in specific weapon classes for custom effects
-	print("Creating bullet for weapon: ", weapon_name)
-	_create_custom_bullet(position, direction)
+	return _create_custom_bullet(position, direction)
 
 func _create_custom_bullet(position: Vector2, direction: Vector2):
 	# Default bullet creation
-	print("Using DEFAULT bullet creation for: ", weapon_name)
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = position
 	bullet.setup(direction, damage, bullet_speed)
+	return bullet
 
 func evolve():
 	if current_form < 3:

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c18dqdq8yo7h5"]
+
+[ext_resource type="Script" path="res://src/scripts/ui/WeaponDisplay.gd" id="1_weapondisplay"]
+
+[node name="WeaponDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 320.0
+offset_bottom = -20.0
+script = ExtResource("1_weapondisplay")
+
+[node name="WeaponName" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 30.0
+text = "Weapon Name"
+
+[node name="WeaponForm" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 35.0
+offset_right = 290.0
+offset_bottom = 50.0
+text = "Form I"
+
+[node name="AmmoBar" type="ProgressBar" parent="."]
+offset_left = 10.0
+offset_top = 55.0
+offset_right = 290.0
+offset_bottom = 65.0
+value = 100.0
+
+[node name="WeaponIcon" type="Sprite2D" parent="."]
+offset_left = 250.0
+offset_top = 10.0
+offset_right = 290.0
+offset_bottom = 50.0

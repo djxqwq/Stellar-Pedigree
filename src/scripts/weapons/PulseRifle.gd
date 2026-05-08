@@ -4,13 +4,13 @@ extends "res://src/scripts/player/Weapon.gd"
 @export var spread_angle: float = 0.0
 
 func _ready():
-	weapon_name = "Pulse Rifle"
+	weapon_name = "脉冲步枪"
 	damage = 12
 	fire_rate = 3.0
 	bullet_speed = 800.0
 	
 	# Create bullet scene
-	bullet_scene = preload("res://src/scenes/player/Bullet.tscn")
+	bullet_scene = preload("res://src/scenes/player/LaserBullet.tscn")
 
 func shoot(position: Vector2, direction: Vector2):
 	if not can_shoot():
@@ -27,14 +27,16 @@ func shoot(position: Vector2, direction: Vector2):
 			_shoot_triple(position, direction)
 
 func _shoot_single(position: Vector2, direction: Vector2):
-	_create_bullet(position, direction)
+	var bullet = _create_bullet(position, direction)
+	bullet.bullet_type = "pulse_rifle"
 
 func _shoot_double(position: Vector2, direction: Vector2):
 	# Form 2: Double shot with higher fire rate
 	for i in range(2):
 		var angle_offset = (i - 0.5) * 0.1
 		var rotated_dir = direction.rotated(angle_offset)
-		_create_bullet(position, rotated_dir)
+		var bullet = _create_bullet(position, rotated_dir)
+		bullet.bullet_type = "pulse_rifle"
 
 func _shoot_triple(position: Vector2, direction: Vector2):
 	# Form 3: Triple shot with penetration
@@ -42,6 +44,7 @@ func _shoot_triple(position: Vector2, direction: Vector2):
 		var angle_offset = (i - 1) * 0.15
 		var rotated_dir = direction.rotated(angle_offset)
 		var bullet = _create_bullet_with_penetration(position, rotated_dir, 2)
+		bullet.bullet_type = "pulse_rifle"
 
 func _create_bullet_with_penetration(position: Vector2, direction: Vector2, pen_count: int):
 	var bullet = bullet_scene.instantiate()

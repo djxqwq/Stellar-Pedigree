@@ -1,11 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvxvxvxvxvxvx"]
+[gd_scene format=3 uid="uid://bvxvxvxvxvxvx"]
 
-[ext_resource type="Script" path="res://src/scripts/Main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://c403c54i0nplj" path="res://src/scripts/Main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://player123" path="res://src/scenes/player/Player.tscn" id="2_player"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1927046572]
 script = ExtResource("1_main")
 
-[node name="Player" parent="." instance=ExtResource("2_player")]
+[node name="Player" parent="." unique_id=1583416289 instance=ExtResource("2_player")]
 position = Vector2(960, 540)
-    
